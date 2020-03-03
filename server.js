@@ -36,8 +36,8 @@ function server(config = {}) {
       const { redis: options = {} } = config;
       const client = redis.createClient(options);
       client.on('connect', () => {
-        if (options.password) {
-          client.auth(options.password, err => {
+        if (options.options.password) {
+          client.auth(options.options.password, err => {
             if (!err) {
               client.on('ready', () => {
                 client.subscribe('stats');
