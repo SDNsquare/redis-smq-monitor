@@ -34,7 +34,7 @@ function server(config = {}) {
       const io = Socket(server, socketOpts);
 
       const { redis: options = {} } = config;
-      const client = redis.createClient(options);
+      const client = redis.createClient(options.options.url ? options.options.url : options);
       client.on('connect', () => {
         if (options.options.password) {
           client.auth(options.options.password, err => {
